@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="UML Class Diagram">
+  <ClassDiagramComponents>
+    <Class name="User" package="" visibility="public" xPosition="662.0" yPosition="223.0">
+      <Fields>
+        <Field name="role" type="Role" visibility="private"/>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="fname" type="String" visibility="private"/>
+        <Field name="sname" type="String" visibility="private"/>
+        <Field name="address" type="Address" visibility="private"/>
+        <Field name="bankDet" type="BankDetails" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Address" package="" visibility="public" xPosition="927.0" yPosition="248.0">
+      <Fields>
+        <Field name="number" type="String" visibility="private"/>
+        <Field name="address1" type="String" visibility="private"/>
+        <Field name="address2" type="String" visibility="private"/>
+        <Field name="county" type="String" visibility="private"/>
+        <Field name="country" type="String" visibility="private"/>
+        <Field name="postcode" type="String" visibility="private"/>
+        <Field name="telephone" type="String" visibility="private"/>
+        <Field name="mobile" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Role" package="" visibility="public" xPosition="927.0" yPosition="22.0">
+      <Literals>
+        <Literal name="ANONYMOUS"/>
+        <Literal name="PARTY_ADMIN"/>
+        <Literal name="BUYER"/>
+        <Literal name="SELLER"/>
+        <Literal name="AUCTIONEER"/>
+        <Literal name="MASTER_ADMIN"/>
+      </Literals>
+    </Enum>
+    <Class name="Auction" package="" visibility="public" xPosition="329.0" yPosition="267.0">
+      <Fields>
+        <Field name="state" type="AuctionState" visibility="private"/>
+        <Field name="auctioneer" type="User" visibility="private"/>
+        <Field name="buyers" type="List&lt;User&gt;" visibility="private"/>
+        <Field name="aucType" type="AuctionType" visibility="private"/>
+        <Field name="lots" type="List&lt;Lot&gt;" visibility="private"/>
+        <Field name="startTime" type="String" visibility="private"/>
+        <Field name="endTime" type="String" visibility="private"/>
+        <Field name="timePerLot" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="AuctionState" package="" visibility="public" xPosition="33.0" yPosition="106.0">
+      <Literals>
+        <Literal name="PLANNING"/>
+        <Literal name="PUBLISHED"/>
+        <Literal name="IN_PROGRESS"/>
+        <Literal name="FINISHED"/>
+        <Literal name="CANCELLED"/>
+      </Literals>
+    </Enum>
+    <Class name="Flower" package="" visibility="public" xPosition="614.0" yPosition="658.0">
+      <Fields>
+        <Field name="commonName" type="String" visibility="private"/>
+        <Field name="sciName" type="String" visibility="private"/>
+        <Field name="farmer" type="User" visibility="private"/>
+        <Field name="minPrice" type="Double" visibility="private"/>
+        <Field name="quantity" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="AuctionType" package="" visibility="public" xPosition="354.0" yPosition="79.0">
+      <Literals>
+        <Literal name="ENGLISH"/>
+        <Literal name="DUTCH"/>
+      </Literals>
+    </Enum>
+    <Class name="Lot" package="" visibility="public" xPosition="92.0" yPosition="537.0">
+      <Fields>
+        <Field name="flower" type="Flower" visibility="private"/>
+        <Field name="currBid" type="Double" visibility="private"/>
+        <Field name="startTime" type="String" visibility="private"/>
+        <Field name="highestBid" type="Bid" visibility="private"/>
+        <Field name="bids" type="List&lt;Bid&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="BankDetails" package="" visibility="public" xPosition="662.0" yPosition="33.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Bid" package="" visibility="public" xPosition="428.0" yPosition="537.0">
+      <Fields>
+        <Field name="buyer" type="User" visibility="private"/>
+        <Field name="amount" type="Double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="user has address" source="User" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has bank details" source="User" target="BankDetails" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="has buyers" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <HasRelation name="user has flowers" source="User" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has bids" source="Lot" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <UseRelation name="has auctioneer" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="1..1"/>
+    <HasRelation name="user has role" source="User" target="Role" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has bids" source="User" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="auction has auction state" source="Auction" target="AuctionState" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
