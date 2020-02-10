@@ -18,6 +18,7 @@ import com.baeldung.model.Message;
 
 @ServerEndpoint(value = "/chat/{username}", decoders = MessageDecoder.class, encoders = MessageEncoder.class)
 public class ChatEndpoint {
+
     private Session session;
     private static final Set<ChatEndpoint> chatEndpoints = new CopyOnWriteArraySet<>();
     private static HashMap<String, String> users = new HashMap<>();
@@ -60,9 +61,11 @@ public class ChatEndpoint {
             synchronized (endpoint) {
                 try {
                     endpoint.session.getBasicRemote()
-                        .sendObject(message);
-                } catch (IOException | EncodeException e) {
+                            .sendObject(message);
+                } catch (IOException e) {
                     e.printStackTrace();
+                } catch (EncodeException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
