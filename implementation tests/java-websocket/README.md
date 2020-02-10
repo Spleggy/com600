@@ -1,6 +1,6 @@
 ## Java WebSocket
 
-This module contains articles about WebSocket in Java.
+This module contains a working WebSocket server endpoint example in Java.
 
 ### Source:
 
