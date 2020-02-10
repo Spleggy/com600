@@ -2,6 +2,6 @@
 
 This module contains articles about WebSocket in Java.
 
-### Relevant articles
+### Source:
 
-- [A Guide to the Java API for WebSocket](https://www.baeldung.com/java-websockets)
+- [Forked from eugenp/tutorials folder](https://github.com/eugenp/tutorials)
