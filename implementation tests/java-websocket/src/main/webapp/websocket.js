@@ -2,7 +2,7 @@ var ws;
 
 function connect() {
     var username = document.getElementById("username").value;
-    
+    var auc_name= document.getElementById("auc_name").value;
     var host = document.location.host;
     var pathname = document.location.pathname;
     
@@ -19,6 +19,8 @@ function connect() {
 function send() {
     var content = document.getElementById("msg").value;
     var json = JSON.stringify({
+        "type":msg_type,
+        "auc_name":auc_name,
         "content":content
     });
 
