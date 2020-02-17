@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="UML Class Diagram">
+  <ClassDiagramComponents>
+    <Interface name="WebUiJsp_do_not_generate" package="" visibility="public" xPosition="213.0" yPosition="92.0">
+      <Methods/>
+    </Interface>
+    <Interface name="ServiceFactory" package="" visibility="public" xPosition="648.0" yPosition="223.0">
+      <Methods>
+        <Method name="getServiceFacade" returnType="ServiceFacade" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RestInterface" package="" visibility="public" xPosition="1000.0" yPosition="164.0">
+      <Methods>
+        <Method name="retrieveMatchingUsers" returnType="User" visibility="public">
+          <Argument type="User" name="template"/>
+        </Method>
+        <Method name="retrieveSysUser" returnType="Integer" visibility="public">
+          <Argument type="Integer" name="id"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="ServiceFacade" package="" visibility="public" xPosition="648.0" yPosition="435.0">
+      <Methods/>
+    </Interface>
+    <Interface name="AuctionFacade" package="" visibility="public" xPosition="315.0" yPosition="587.0">
+      <Methods>
+        <Method name="createAuction" returnType="Auction" visibility="public">
+          <Argument type="Auction" name="auction"/>
+        </Method>
+        <Method name="updateAuction" returnType="Auction" visibility="public">
+          <Argument type="Auction" name="auction"/>
+        </Method>
+        <Method name="deleteAuction" returnType="Boolean" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="retrieveAuction" returnType="Auction" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="retrieveAllAuctions" returnType="List&lt;Auction&gt;" visibility="public"/>
+        <Method name="retrieveAllByAuctionState" returnType="List&lt;Auction&gt;" visibility="public">
+          <Argument type="AuctionState" name="aucState"/>
+        </Method>
+        <Method name="addAuctioneerToAuction" returnType="Boolean" visibility="public">
+          <Argument type="Auction" name="auction"/>
+          <Argument type="User" name="auctioneer"/>
+        </Method>
+        <Method name="addBidToLot" returnType="Boolean" visibility="public">
+          <Argument type="Lot" name="lot"/>
+          <Argument type="Bid" name="bid"/>
+          <Argument type="User" name="buyer"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="UserDAO" package="" visibility="public" xPosition="948.0" yPosition="1115.0">
+      <Methods/>
+    </Interface>
+    <Interface name="AuctionDAO" package="" visibility="public" xPosition="325.0" yPosition="929.0">
+      <Methods/>
+    </Interface>
+    <Interface name="UserFacade" package="" visibility="public" xPosition="1073.0" yPosition="759.0">
+      <Methods>
+        <Method name="createUser" returnType="User" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+        <Method name="deleteUser" returnType="Boolean" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="retrieveUser" returnType="User" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="retrieveAllUsers" returnType="List&lt;User&gt;" visibility="public"/>
+        <Method name="updateUser" returnType="User" visibility="public">
+          <Argument type="User" name="user"/>
+        </Method>
+        <Method name="retrieveAllUsersByRole" returnType="List&lt;User&gt;" visibility="public">
+          <Argument type="Role" name="role"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="Auction" package="" visibility="public" xPosition="378.0" yPosition="1374.0">
+      <Fields>
+        <Field name="aucState" type="AuctionState" visibility="private"/>
+        <Field name="auctioneer" type="User" visibility="private"/>
+        <Field name="buyers" type="List&lt;User&gt;" visibility="private"/>
+        <Field name="aucType" type="AuctionType" visibility="private"/>
+        <Field name="lots" type="List&lt;Lot&gt;" visibility="private"/>
+        <Field name="startTime" type="String" visibility="private"/>
+        <Field name="endTime" type="String" visibility="private"/>
+        <Field name="timePerLot" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="User" package="" visibility="public" xPosition="860.0" yPosition="1479.0">
+      <Fields>
+        <Field name="role" type="Role" visibility="private"/>
+        <Field name="username" type="String" visibility="private"/>
+        <Field name="fname" type="String" visibility="private"/>
+        <Field name="sname" type="String" visibility="private"/>
+        <Field name="address" type="Address" visibility="private"/>
+        <Field name="bankDet" type="BankDetails" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="BankDetails" package="" visibility="public" xPosition="726.0" yPosition="1321.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Role" package="" visibility="public" xPosition="1155.0" yPosition="1358.0">
+      <Literals>
+        <Literal name="ANONYMOUS"/>
+        <Literal name="PARTY_ADMIN"/>
+        <Literal name="BUYER"/>
+        <Literal name="SELLER"/>
+        <Literal name="AUCTIONEER"/>
+        <Literal name="MASTER_ADMIN"/>
+      </Literals>
+    </Enum>
+    <Class name="Flower" package="" visibility="public" xPosition="790.0" yPosition="1917.0">
+      <Fields>
+        <Field name="commonName" type="String" visibility="private"/>
+        <Field name="sciName" type="String" visibility="private"/>
+        <Field name="farmer" type="User" visibility="private"/>
+        <Field name="minPrice" type="Double" visibility="private"/>
+        <Field name="quantity" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Address" package="" visibility="public" xPosition="1144.0" yPosition="1590.0">
+      <Fields>
+        <Field name="number" type="String" visibility="private"/>
+        <Field name="address1" type="String" visibility="private"/>
+        <Field name="address2" type="String" visibility="private"/>
+        <Field name="county" type="String" visibility="private"/>
+        <Field name="country" type="String" visibility="private"/>
+        <Field name="postcode" type="String" visibility="private"/>
+        <Field name="telephone" type="String" visibility="private"/>
+        <Field name="mobile" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Bid" package="" visibility="public" xPosition="594.0" yPosition="1750.0">
+      <Fields>
+        <Field name="buyer" type="User" visibility="private"/>
+        <Field name="amount" type="Double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="AuctionType" package="" visibility="public" xPosition="617.0" yPosition="1187.0">
+      <Literals>
+        <Literal name="ENGLISH"/>
+        <Literal name="DUTCH"/>
+      </Literals>
+    </Enum>
+    <Enum name="AuctionState" package="" visibility="public" xPosition="68.0" yPosition="1154.0">
+      <Literals>
+        <Literal name="PLANNING"/>
+        <Literal name="PUBLISHED"/>
+        <Literal name="IN_PROGRESS"/>
+        <Literal name="FINISHED"/>
+        <Literal name="CANCELLED"/>
+      </Literals>
+    </Enum>
+    <Class name="Lot" package="" visibility="public" xPosition="325.0" yPosition="1795.0">
+      <Fields>
+        <Field name="flower" type="Flower" visibility="private"/>
+        <Field name="currBid" type="Double" visibility="private"/>
+        <Field name="startTime" type="String" visibility="private"/>
+        <Field name="highestBid" type="Bid" visibility="private"/>
+        <Field name="bids" type="List&lt;Bid&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation name="service facade extends user facade" source="ServiceFacade" target="UserFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="has flowers" source="User" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="JSPs use service factory" source="WebUiJsp_do_not_generate" target="ServiceFactory" sourceCardinality="0..*" targetCardinality="1..1"/>
+    <UseRelation name="Rest uses service factory" source="RestInterface" target="ServiceFactory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="has auctioneer" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="1..1"/>
+    <HasRelation name="has address" source="User" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="has buyers" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <UseRelation name="uses auction" source="AuctionDAO" target="Auction" sourceCardinality="1..1" targetCardinality="0..*"/>
+    <UseRelation name="Service facade uses service factory" source="ServiceFacade" target="ServiceFactory" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="service facade extends auction facade" source="ServiceFacade" target="AuctionFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="uses user" source="UserDAO" target="User" sourceCardinality="1..1" targetCardinality="0..*"/>
+    <HasRelation name="has bids" source="User" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has bids" source="Lot" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <UseRelation name="user facade extends user dao" source="UserFacade" target="UserDAO" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="has auction state" source="Auction" target="AuctionState" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="auction facade extends auction dao" source="AuctionFacade" target="AuctionDAO" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="has bank details" source="User" target="BankDetails" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="Rest uses service facade" source="RestInterface" target="ServiceFacade" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="JSPs use service facade" source="WebUiJsp_do_not_generate" target="ServiceFacade" sourceCardinality="0..*" targetCardinality="1..1"/>
+    <HasRelation name="has role" source="User" target="Role" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
