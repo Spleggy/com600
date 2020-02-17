@@ -1,0 +1,37 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <!-- imports classpath application configuration resources -->
+    <import resource="classpath:appconfig-data.xml"/>
+    
+    <!--initialise db add role types--> 
+    <bean id="dBInitialise " class="org.solent.com504.project.impl.user.service.DBInitialise " init-method="init" />
+
+    <import resource="classpath:appconfig-security.xml"/>
+
+    <!-- Scans for components that will be auto-registered as Spring beans -->
+    <context:component-scan base-package="org.solent.com504.project.impl.service,
+                org.solent.com504.project.impl.user.service,
+                org.solent.com504.project.impl.party.service" />
+    
+
+
+</beans>
+
