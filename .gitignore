@@ -1,2 +1,5 @@
 /implementation tests/java-websocket/target/
 /implementation tests/websocket-test/target/
+/starter-project-1.5-SNAPSHOT/project/model/target/
+/starter-project-1.5-SNAPSHOT/project/dao-springdata-jpa/target/
+/starter-project-1.5-SNAPSHOT/project/service/target/
