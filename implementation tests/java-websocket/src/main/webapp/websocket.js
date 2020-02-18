@@ -19,10 +19,18 @@ function connect() {
 function send() {
     var content = document.getElementById("msg").value;
     var json = JSON.stringify({
-        "type":msg_type,
+        "type":"bid",
         "auc_name":auc_name,
         "content":content
     });
 
+    ws.send(json);
+}
+function start(){
+    var json = JSON.stringify({
+        "type":"start",
+        "auc_name":auc_name,
+        "content":"START"
+    });
     ws.send(json);
 }
