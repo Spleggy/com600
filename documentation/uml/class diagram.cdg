@@ -6,7 +6,7 @@
       <Fields>
         <Field name="auction_id" type="Long" visibility="private"/>
         <Field name="auctioneer" type="User" visibility="private"/>
-        <Field name="buyers" type="List&lt;User&gt;" visibility="private"/>
+        <Field name="buyers" type="List&lt;Party&gt;" visibility="private"/>
         <Field name="aucType" type="AuctionType" visibility="private"/>
         <Field name="lots" type="List&lt;Lot&gt;" visibility="private"/>
         <Field name="startTime" type="String" visibility="private"/>
@@ -17,7 +17,7 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="User" package="" visibility="public" xPosition="772.0" yPosition="1232.0">
+    <Class name="User" package="" visibility="public" xPosition="623.0" yPosition="1276.0">
       <Fields>
         <Field name="user_id" type="Long" visibility="private"/>
         <Field name="username" type="String" visibility="private"/>
@@ -29,18 +29,18 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Flower" package="" visibility="public" xPosition="537.0" yPosition="1018.0">
+    <Class name="Flower" package="" visibility="public" xPosition="537.0" yPosition="880.0">
       <Fields>
         <Field name="flower_id" type="Long" visibility="private"/>
         <Field name="commName" type="String" visibility="private"/>
         <Field name="sciName" type="String" visibility="private"/>
         <Field name="quantity" type="Integer" visibility="private"/>
-        <Field name="farmer" type="User" visibility="private"/>
+        <Field name="seller" type="Party" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Address" package="" visibility="public" xPosition="1170.0" yPosition="1419.0">
+    <Class name="Address" package="" visibility="public" xPosition="1094.0" yPosition="1228.0">
       <Fields>
         <Field name="number" type="String" visibility="private"/>
         <Field name="address1" type="String" visibility="private"/>
@@ -54,17 +54,18 @@
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Bid" package="" visibility="public" xPosition="873.0" yPosition="590.0">
+    <Class name="Bid" package="" visibility="public" xPosition="864.0" yPosition="525.0">
       <Fields>
         <Field name="bid_id" type="Long" visibility="private"/>
         <Field name="amount" type="Double" visibility="private"/>
         <Field name="lot" type="Lot" visibility="private"/>
-        <Field name="buyer" type="User" visibility="private"/>
+        <Field name="buyer" type="Party" visibility="private"/>
+        <Field name="bidTime" type="String" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
     </Class>
-    <Class name="Lot" package="" visibility="public" xPosition="529.0" yPosition="590.0">
+    <Class name="Lot" package="" visibility="public" xPosition="465.0" yPosition="580.0">
       <Fields>
         <Field name="lot_id" type="Long" visibility="private"/>
         <Field name="flower" type="Flower" visibility="private"/>
@@ -73,6 +74,17 @@
         <Field name="bids" type="List&lt;Bid&gt;" visibility="private"/>
         <Field name="currBid" type="Double" visibility="private"/>
         <Field name="reservePrice" type="Double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Party" package="" visibility="public" xPosition="921.0" yPosition="846.0">
+      <Fields>
+        <Field name="party_id" type="Long" visibility="private"/>
+        <Field name="party_admins" type="List&lt;User&gt;" visibility="private"/>
+        <Field name="members" type="List&lt;User&gt;" visibility="private"/>
+        <Field name="partytype" type="PartyType" visibility="private"/>
+        <Field name="business_addr" type="Address" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods/>
@@ -133,13 +145,13 @@
           <Argument type="Long" name="id"/>
         </Method>
         <Method name="retrieveAllBids" returnType="List&lt;Bid&gt;" visibility="public"/>
-        <Method name="addBidToLot" returnType="Boolean" visibility="public">
+        <Method name="addBidToLot" returnType="Long" visibility="public">
           <Argument type="Long" name="lot_id"/>
           <Argument type="Long" name="bid_id"/>
         </Method>
       </Methods>
     </Interface>
-    <Enum name="Role" package="" visibility="public" xPosition="1155.0" yPosition="1149.0">
+    <Enum name="Role" package="" visibility="public" xPosition="574.0" yPosition="1541.0">
       <Literals>
         <Literal name="ANONYMOUS"/>
         <Literal name="PARTY_ADMIN"/>
@@ -164,22 +176,33 @@
         <Literal name="CANCELLED"/>
       </Literals>
     </Enum>
+    <Enum name="PartyType" package="" visibility="public" xPosition="1206.0" yPosition="853.0">
+      <Literals>
+        <Literal name="BUYER"/>
+        <Literal name="SELLER"/>
+      </Literals>
+    </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="auction dao uses auction" source="AuctionDAO" target="Auction" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="buyer party has bids" source="Party" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has bids" source="Lot" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="bid has a lot" source="Bid" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <UseRelation name="has auctioneer" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="1..1"/>
     <HasRelation name="has auction state" source="Auction" target="AuctionState" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="bid has a lot" source="Bid" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="bid dao uses bid" source="BidDAO" target="Bid" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation name="has buyers" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
     <UseRelation name="lot dao uses lot" source="LotDAO" target="Lot" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="has flowers" source="User" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="has role" source="User" target="Role" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="has bids" source="User" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="1..1" collectionType="List"/>
+    <UseRelation name="buyer party has buyers" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="bid dao uses bid" source="BidDAO" target="Bid" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="seller party has flowers" source="Party" target="Flower" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <HasRelation name="party has party type" source="Party" target="PartyType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="party has address" source="Party" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="seller party has sellers" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <UseRelation name="auction has parties" source="Auction" target="Party" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <UseRelation name="party has party admins" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
     <HasRelation name="has address" source="User" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="auction dao uses auction" source="AuctionDAO" target="Auction" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="has bids" source="Lot" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
   </ClassDiagramRelations>
 </ClassDiagram>
