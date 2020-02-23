@@ -176,7 +176,7 @@
         <Literal name="CANCELLED"/>
       </Literals>
     </Enum>
-    <Enum name="PartyType" package="" visibility="public" xPosition="1206.0" yPosition="853.0">
+    <Enum name="PartyType" package="" visibility="public" xPosition="1208.0" yPosition="796.0">
       <Literals>
         <Literal name="BUYER"/>
         <Literal name="SELLER"/>
@@ -184,25 +184,22 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation name="auction dao uses auction" source="AuctionDAO" target="Auction" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="has auctioneer" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="1..1"/>
+    <UseRelation name="lot dao uses lot" source="LotDAO" target="Lot" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="has address" source="User" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="party has users" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <HasRelation name="has role" source="User" target="Role" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <UseRelation name="bid dao uses bid" source="BidDAO" target="Bid" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="auction has parties" source="Auction" target="Party" sourceCardinality="0..*" targetCardinality="0..*"/>
+    <HasRelation name="party has address" source="Party" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has auction state" source="Auction" target="AuctionState" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
     <HasRelation name="buyer party has bids" source="Party" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
     <HasRelation name="has bids" source="Lot" target="Bid" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <UseRelation name="auction dao uses auction" source="AuctionDAO" target="Auction" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="bid has a lot" source="Bid" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="has auctioneer" source="Auction" target="User" sourceCardinality="0..*" targetCardinality="1..1"/>
-    <HasRelation name="has auction state" source="Auction" target="AuctionState" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="lot dao uses lot" source="LotDAO" target="Lot" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="has flowers" source="Lot" target="Flower" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="has role" source="User" target="Role" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="buyer party has buyers" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
-    <HasRelation name="has lots" source="Auction" target="Lot" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
-    <HasRelation name="has auction type" source="Auction" target="AuctionType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="bid dao uses bid" source="BidDAO" target="Bid" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation name="seller party has flowers" source="Party" target="Flower" sourceCardinality="0..*" targetCardinality="0..*"/>
     <HasRelation name="party has party type" source="Party" target="PartyType" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <HasRelation name="party has address" source="Party" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <UseRelation name="seller party has sellers" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
-    <UseRelation name="auction has parties" source="Auction" target="Party" sourceCardinality="0..*" targetCardinality="0..*"/>
-    <UseRelation name="party has party admins" source="Party" target="User" sourceCardinality="0..*" targetCardinality="0..*"/>
-    <HasRelation name="has address" source="User" target="Address" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
