@@ -17,20 +17,26 @@ function connect() {
 }
 
 function send() {
+    console.log("in send");
     var content = document.getElementById("msg").value;
+    var auc_name= document.getElementById("auc_name").value;
     var json = JSON.stringify({
         "type":"bid",
         "auc_name":auc_name,
         "content":content
     });
-
+    console.log(json);
     ws.send(json);
 }
 function start(){
+    console.log("in start");
+    var auc_name= document.getElementById("auc_name").value;
+    console.log(auc_name);
     var json = JSON.stringify({
         "type":"start",
         "auc_name":auc_name,
         "content":"START"
     });
+    console.log(json);
     ws.send(json);
 }

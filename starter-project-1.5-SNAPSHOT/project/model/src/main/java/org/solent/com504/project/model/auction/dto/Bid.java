@@ -64,7 +64,7 @@ public class Bid {
     public void setLot_id(Long lot_id) {
         this.lot_id = lot_id;
     }
-
+    //connection ManyToOne
     public Party getBuyer() {
         return buyer;
     }

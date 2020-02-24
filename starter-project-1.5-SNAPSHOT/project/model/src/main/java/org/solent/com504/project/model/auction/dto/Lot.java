@@ -92,8 +92,8 @@ public class Lot {
     public void setReservePrice(Double reservePrice) {
         this.reservePrice = reservePrice;
     }
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "lot_highBids", joinColumns = @JoinColumn(name = "lot_id"), inverseJoinColumns = @JoinColumn(name = "bid_id"))
+    //@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    //@JoinTable(name = "lot_highBids", joinColumns = @JoinColumn(name = "lot_id"), inverseJoinColumns = @JoinColumn(name = "bid_id"))
     public Bid getHighestBid() {
         return highestBid;
     }
@@ -101,6 +101,7 @@ public class Lot {
     public void setHighestBid(Bid highestBid) {
         this.highestBid = highestBid;
     }
+    //remove 
     // party owns relationship
     // see https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
