@@ -15,10 +15,15 @@ import org.solent.com504.project.model.auction.dto.Lot;
  */
 public interface BidDAO {
     public Bid findById(Long id);
+    
     public List<Bid> findAll();
     
     public Bid save(Bid bid);
+    
     public void deleteById(Long id);
+    
     public void delete(Bid bid);
+    
+    public void deleteAll();
     
 }

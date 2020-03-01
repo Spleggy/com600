@@ -14,10 +14,15 @@ import org.solent.com504.project.model.auction.dto.Auction;
  */
 public interface AuctionDAO {
     public Auction findById(Long id);
+    
     public List<Auction> findAll();
     
     public Auction save(Auction auction);
+    
     public void deleteById(Long id);
+    
     public void delete(Auction auction);
+    
+    public void deleteAll();
     
 }

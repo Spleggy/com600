@@ -9,14 +9,15 @@ import java.util.List;
 import org.solent.com504.project.impl.dao.auction.springdata.LotRepository;
 
 import org.solent.com504.project.model.auction.dao.LotDAO;
-import org.solent.com504.project.model.auction.dto.Flower;
 import org.solent.com504.project.model.auction.dto.Lot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author anton
  */
+@Component
 public class LotDAOImplSpring implements LotDAO {
     
     @Autowired
@@ -50,6 +51,11 @@ public class LotDAOImplSpring implements LotDAO {
     @Override
     public List<Lot> findByFlower(String sciName) {
         return lotRepository.findByFlower(sciName);
+    }
+
+    @Override
+    public void deleteAll() {
+        lotRepository.deleteAll();
     }
     
 }

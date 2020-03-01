@@ -15,11 +15,16 @@ import org.solent.com504.project.model.auction.dto.Lot;
  */
 public interface LotDAO {
     public Lot findById(Long id);
+    
     public List<Lot> findAll();
     
     public Lot save(Lot lot);
+    
     public void deleteById(Long id);
+    
     public void delete(Lot lot);
+    
+    public void deleteAll();
     
     public List<Lot> findByFlower(String sciName);
     

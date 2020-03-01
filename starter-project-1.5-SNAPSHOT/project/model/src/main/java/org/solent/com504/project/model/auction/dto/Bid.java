@@ -8,19 +8,15 @@ package org.solent.com504.project.model.auction.dto;
 import org.solent.com504.project.model.party.dto.Party;
 
 
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -31,22 +27,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author anton
  */
-public class Bid {
-    private Long bid_id;
-    private Double amount;
-    private Long lot_id;
-    private Party buyer;
-    private String bid_time;
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 
+@Entity
+public class Bid {
+    private Long id;
+    private Double amount;
+    private String bid_time;
+    
+    @XmlElementWrapper(name = "lots")
+    @XmlElement(name = "lot")
+    private Lot lot;
+    
+    @XmlElementWrapper(name = "parties")
+    @XmlElement(name = "party")
+    private Party buyer;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getBid_id() {
-        return bid_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setBid_id(Long bid_id) {
-        this.bid_id = bid_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Double getAmount() {
@@ -56,15 +61,19 @@ public class Bid {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
-
-    public Long getLot_id() {
-        return lot_id;
+    
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "lot_id")
+    public Lot getLot() {
+        return lot;
     }
 
-    public void setLot_id(Long lot_id) {
-        this.lot_id = lot_id;
+    public void setLot(Lot lot) {
+        this.lot = lot;
     }
-    //connection ManyToOne
+    
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "party_id")
     public Party getBuyer() {
         return buyer;
     }

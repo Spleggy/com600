@@ -11,11 +11,13 @@ import org.solent.com504.project.model.auction.dao.BidDAO;
 import org.solent.com504.project.model.auction.dto.Bid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Kevin
  */
+@Component
 public class BidDAOImpl implements BidDAO {
     
     @Autowired
@@ -44,6 +46,11 @@ public class BidDAOImpl implements BidDAO {
     @Override
     public void delete(Bid bid) {
        bidRepository.delete(bid);
+    }
+
+    @Override
+    public void deleteAll() {
+        bidRepository.deleteAll();
     }
     
 }

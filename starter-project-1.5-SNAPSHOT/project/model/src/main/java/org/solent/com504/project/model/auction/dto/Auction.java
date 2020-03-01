@@ -20,6 +20,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -33,36 +34,41 @@ import org.solent.com504.project.model.user.dto.User;
  *
  * @author Kevin
  */
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+
+@Entity
 public class Auction {
-    private Long auction_id;
-    private User auctioneer;
-    private List<Party> buyers;
-    private AuctionType auction_type;
-    private List<Lot> lots;
+    private Long id;
     private String startTime;
     private String endTime;
     private String timePerLot;
-    private AuctionState auctionState;
+    private AuctionState auctionState=AuctionState.PLANNING;
+    private AuctionType auction_type=AuctionType.ENGLISH;
+    
+    @XmlElementWrapper(name = "parties")
+    @XmlElement(name = "party")
+    private List<Party> buyers;
+    
+    @XmlElementWrapper(name = "lots")
+    @XmlElement(name = "lot")
+    private List<Lot> lots;
+
 
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getAuction_id() {
-        return auction_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setAuction_id(Long auction_id) {
-        this.auction_id = auction_id;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public User getAuctioneer() {
-        return auctioneer;
-    }
-
-    public void setAuctioneer(User auctioneer) {
-        this.auctioneer = auctioneer;
-    }
-
+    
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "auction_buyers", joinColumns = @JoinColumn(name = "auction_id"), inverseJoinColumns = @JoinColumn(name = "party_id"))
     public List<Party> getBuyers() {
         return buyers;
     }
@@ -78,7 +84,8 @@ public class Auction {
     public void setAuction_type(AuctionType auction_type) {
         this.auction_type = auction_type;
     }
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "auction_lots", joinColumns = @JoinColumn(name = "auction_id"), inverseJoinColumns = @JoinColumn(name = "lot_id"))
     public List<Lot> getLots() {
         return lots;
     }

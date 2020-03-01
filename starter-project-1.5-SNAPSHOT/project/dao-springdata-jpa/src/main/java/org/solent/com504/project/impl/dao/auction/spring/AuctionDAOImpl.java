@@ -9,14 +9,15 @@ import java.util.List;
 import org.solent.com504.project.impl.dao.auction.springdata.AuctionRepository;
 import org.solent.com504.project.model.auction.dao.AuctionDAO;
 import org.solent.com504.project.model.auction.dto.Auction;
-import org.solent.com504.project.model.auction.dto.Bid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Kevin
  */
+@Component
 public class AuctionDAOImpl implements AuctionDAO {
     
     @Autowired
@@ -45,6 +46,11 @@ public class AuctionDAOImpl implements AuctionDAO {
     @Override
     public void delete(Auction auction) {
        auctionRepository.delete(auction);
+    }
+
+    @Override
+    public void deleteAll() {
+        auctionRepository.deleteAll();
     }
     
 }

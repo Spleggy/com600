@@ -5,8 +5,6 @@
  */
 package org.solent.com504.project.model.auction.dto;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -15,14 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.solent.com504.project.model.party.dto.Party;
 
 /**
  *
@@ -43,11 +40,11 @@ public class Lot {
         
     @XmlElementWrapper(name = "bids")
     @XmlElement(name = "bid")
-    private Bid highestBid=new Bid();
+    private Bid highestBid=null;
     
-    @XmlElementWrapper(name = "bids")
-    @XmlElement(name = "bid")
-    private Set<Bid> bids = new HashSet();
+    @XmlElementWrapper(name = "parties")
+    @XmlElement(name = "party")
+    private Party seller;
     
     
     @Id
@@ -92,8 +89,8 @@ public class Lot {
     public void setReservePrice(Double reservePrice) {
         this.reservePrice = reservePrice;
     }
-    //@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    //@JoinTable(name = "lot_highBids", joinColumns = @JoinColumn(name = "lot_id"), inverseJoinColumns = @JoinColumn(name = "bid_id"))
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "lot_id")
     public Bid getHighestBid() {
         return highestBid;
     }
@@ -101,20 +98,15 @@ public class Lot {
     public void setHighestBid(Bid highestBid) {
         this.highestBid = highestBid;
     }
-    //remove 
-    // party owns relationship
-    // see https://vladmihalcea.com/the-best-way-to-use-the-manytomany-annotation-with-jpa-and-hibernate/
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "lot_bids", joinColumns = @JoinColumn(name = "lot_id"), inverseJoinColumns = @JoinColumn(name = "bid_id"))
-    public Set<Bid> getBids() {
-        return bids;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "lot_id")
+    public Party getSeller() {
+        return seller;
     }
 
-    public void setBids(Set<Bid> bids) {
-        this.bids = bids;
+    public void setSeller(Party seller) {
+        this.seller = seller;
     }
-    
-    
-
     
 }
