@@ -84,8 +84,7 @@ public class Auction {
     public void setAuction_type(AuctionType auction_type) {
         this.auction_type = auction_type;
     }
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "auction_lots", joinColumns = @JoinColumn(name = "auction_id"), inverseJoinColumns = @JoinColumn(name = "lot_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     public List<Lot> getLots() {
         return lots;
     }
