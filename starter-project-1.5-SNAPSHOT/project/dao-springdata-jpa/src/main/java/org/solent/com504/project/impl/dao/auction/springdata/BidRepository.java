@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 public interface BidRepository extends JpaRepository<Bid, Long> {
     
     
-    @Query("select b from Bid b LEFT JOIN FETCH b.bids where b.party = :party")
-    public List<Bid> findByParty(@Param("party") Party party);
+    @Query("select b from Bid b where b.buyer.id = :partyId")
+    public List<Bid> findByParty(@Param("partyId") Long id);
    
 }

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public interface LotRepository extends JpaRepository<Lot, Long> {
     
     
-    @Query("select l from Lot l LEFT JOIN FETCH l.bids where l.sciName = :sciName")
+    @Query("select l from Lot l where l.flower.sciName = :sciName")
     public List<Lot> findByFlower(@Param("sciName") String sciName);
     
 }

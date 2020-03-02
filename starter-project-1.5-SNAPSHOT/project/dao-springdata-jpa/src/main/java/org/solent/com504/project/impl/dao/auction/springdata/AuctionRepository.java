@@ -21,8 +21,8 @@ import org.springframework.stereotype.Repository;
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
     
     
-    @Query("select a from Auction a LEFT JOIN FETCH a.auctions where a.auctionState = :auctionState")
-    public List<Auction> findByState(@Param("auction_state") AuctionState auctionState);
+    @Query("select a from Auction a where a.auctionState = :auctionState")
+    public List<Auction> findByState(@Param("auctionState") AuctionState auctionState);
     
     
 }

@@ -90,7 +90,6 @@ public class Lot {
         this.reservePrice = reservePrice;
     }
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "lot_id")
     public Bid getHighestBid() {
         return highestBid;
     }
@@ -100,7 +99,6 @@ public class Lot {
     }
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "lot_id")
     public Party getSeller() {
         return seller;
     }
