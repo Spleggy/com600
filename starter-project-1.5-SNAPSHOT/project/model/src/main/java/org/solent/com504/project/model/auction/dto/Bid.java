@@ -36,11 +36,11 @@ public class Bid {
     private Double amount;
     private String bid_time;
     
-    @XmlElementWrapper(name = "lots")
+    
     @XmlElement(name = "lot")
     private Lot lot;
     
-    @XmlElementWrapper(name = "parties")
+    
     @XmlElement(name = "party")
     private Party buyer;
     

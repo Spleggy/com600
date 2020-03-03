@@ -47,7 +47,7 @@ public class Auction {
     private AuctionState auctionState=AuctionState.PLANNING;
     private AuctionType auction_type=AuctionType.ENGLISH;
     
-    @XmlElementWrapper(name = "parties")
+    
     @XmlElement(name = "party")
     private List<Party> buyers;
     

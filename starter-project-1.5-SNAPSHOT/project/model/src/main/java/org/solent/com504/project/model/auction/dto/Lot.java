@@ -38,11 +38,11 @@ public class Lot {
     private Double currBid;
     private Double reservePrice;
         
-    @XmlElementWrapper(name = "bids")
+    
     @XmlElement(name = "bid")
     private Bid highestBid=null;
     
-    @XmlElementWrapper(name = "parties")
+   
     @XmlElement(name = "party")
     private Party seller;
     
