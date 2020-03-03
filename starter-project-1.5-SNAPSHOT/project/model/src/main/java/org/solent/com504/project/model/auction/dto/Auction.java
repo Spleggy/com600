@@ -125,6 +125,11 @@ public class Auction {
         this.auctionState = auctionState;
     }
 
+    @Override
+    public String toString() {
+        return "Auction{" + "id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", timePerLot=" + timePerLot + ", auctionState=" + auctionState + ", auction_type=" + auction_type + ", buyers=" + buyers + ", lots=" + lots + '}';
+    }
+
    
     
     

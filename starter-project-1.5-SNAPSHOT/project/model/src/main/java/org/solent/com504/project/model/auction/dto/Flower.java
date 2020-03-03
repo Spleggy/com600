@@ -45,6 +45,11 @@ public class Flower {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Flower{" + "commName=" + commName + ", sciName=" + sciName + ", quantity=" + quantity + '}';
+    }
     
     
 }

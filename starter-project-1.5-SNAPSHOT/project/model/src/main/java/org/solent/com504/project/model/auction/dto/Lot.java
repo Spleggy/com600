@@ -106,5 +106,10 @@ public class Lot {
     public void setSeller(Party seller) {
         this.seller = seller;
     }
+
+    @Override
+    public String toString() {
+        return "Lot{" + "id=" + id + ", flower=" + flower + ", startTime=" + startTime + ", currBid=" + currBid + ", reservePrice=" + reservePrice + ", highestBid=" + highestBid + ", seller=" + seller + '}';
+    }
     
 }
