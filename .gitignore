@@ -6,3 +6,9 @@
 /starter-project-1.5-SNAPSHOT/project/web/target/
 /starter-project-1.5-SNAPSHOT/project/client-rest/target/
 /starter-project-1.5-SNAPSHOT/project/web-client/target/
+/projectweb/project/model/target/
+/projectweb/project/dao-springdata-jpa/target/
+/projectweb/project/service/target/
+/projectweb/project/web/target/
+/projectweb/project/client-rest/target/
+/projectweb/project/web-client/target/

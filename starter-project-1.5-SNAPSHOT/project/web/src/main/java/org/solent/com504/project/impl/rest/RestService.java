@@ -20,6 +20,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.solent.com504.project.model.auction.dao.AuctionDAO;
+import org.solent.com504.project.model.auction.dto.Auction;
 import org.solent.com504.project.model.dto.ReplyMessage;
 import org.solent.com504.project.model.service.ServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +99,34 @@ public class RestService {
         }
     }
 
- 
+    @GET
+    @Path("/getAuctions")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAuctions() {
+        try {
+            
+            ReplyMessage replyMessage = new ReplyMessage();
+            LOG.debug("/getAuctions called");
+            
+            if (serviceFacade == null) {
+                throw new RuntimeException("serviceFacade==null and has not been initialised");
+            }
+            
+            AuctionDAO auctionDAO = null;
+            List<Auction> auctionList = auctionDAO.findAll();
+            
+            replyMessage.setAuctionList(auctionList);
+            replyMessage.setCode(Response.Status.OK.getStatusCode());
+            
+            return Response.status(Response.Status.OK).entity(replyMessage).build();
+            
+        } catch (Exception ex) {
+            LOG.error("error calling /getAuctions ", ex);
+            ReplyMessage replyMessage = new ReplyMessage();
+            replyMessage.setCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+            replyMessage.setDebugMessage("error calling /getAuctions " + ex.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(replyMessage).build();
+        }
+    }
 
 }
