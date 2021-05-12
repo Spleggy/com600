@@ -18,7 +18,7 @@
         <jsp-api.version>2.1</jsp-api.version>
         <spring.version>5.2.3.RELEASE</spring.version>
         <spring.data.jpa.version>2.2.3.RELEASE</spring.data.jpa.version>
-        <spring-security.version>5.2.1.RELEASE</spring-security.version>
+        <spring-security.version>5.2.10.RELEASE</spring-security.version>
         <hibernate.version>5.2.17.Final</hibernate.version>
         <hsqldb.version>2.2.4</hsqldb.version>
         <swagger.version>2.0.0</swagger.version>
